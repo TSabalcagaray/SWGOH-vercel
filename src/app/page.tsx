@@ -6,7 +6,7 @@ export default function Home() {
     <div className={styles.page}>
       <main className={styles.main}>
 
-        <p> TITI APP</p>
+        <p> TITI APP 2</p>
       </main>
       <footer className={styles.footer}>
         <a
