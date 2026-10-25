@@ -1,0 +1,40 @@
+.page {
+  min-height: 100svh;
+  background: #fff;
+  color: #171717;
+}
+
+.header {
+  padding: 24px 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 999px;
+  font-size: 0.95rem;
+  transition:
+    background 0.2s,
+    border-color 0.2s;
+}
+
+.back:hover {
+  background: #f2f2f2;
+  border-color: transparent;
+}
+
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px 48px;
+}
+
+.title {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+}
