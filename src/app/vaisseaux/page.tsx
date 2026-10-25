@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
-import { CategoryPage } from "@/components/category-page/category-page";
+import { SpacePage } from "@/components/space-page/space-page";
+import { CapitalShipGrid } from "@/components/capital-ship-grid/capital-ship-grid";
+import { capitalShips } from "@/data/capital-ships";
 
 export const metadata: Metadata = {
   title: "Vaisseaux · SWGOH Teams",
 };
 
 export default function VaisseauxPage() {
-  return <CategoryPage title="Vaisseaux" />;
+  return (
+    <SpacePage backHref="/" backLabel="Retour">
+      <CapitalShipGrid ships={capitalShips} />
+    </SpacePage>
+  );
 }
