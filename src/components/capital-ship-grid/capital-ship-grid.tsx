@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { CapitalShip } from "@/data/capital-ships";
-import { CapitalShipIcon } from "@/components/ship-icon/ship-icon";
+import { CapitalShipPortrait } from "@/components/capital-ship-portrait/capital-ship-portrait";
 import styles from "./capital-ship-grid.module.css";
 
 interface CapitalShipGridProps {
@@ -18,7 +18,7 @@ export const CapitalShipGrid = ({ ships }: CapitalShipGridProps) => (
             href={`/vaisseaux/${ship.slug}`}
             className={`${styles.card} ${ship.alignment === "light" ? styles.light : styles.dark}`}
           >
-            <CapitalShipIcon silhouette={ship.silhouette} className={styles.icon} />
+            <CapitalShipPortrait ship={ship} className={styles.icon} />
             <h2 className={styles.name}>{ship.name}</h2>
             <p className={styles.commander}>{ship.commander}</p>
             <span className={styles.faction}>{ship.faction}</span>

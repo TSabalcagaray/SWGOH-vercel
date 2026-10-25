@@ -1,6 +1,7 @@
 import type { CapitalShip } from "@/data/capital-ships";
 import type { Fleet } from "@/data/fleets";
-import { CapitalShipIcon, FighterIcon } from "@/components/ship-icon/ship-icon";
+import { FighterIcon } from "@/components/ship-icon/ship-icon";
+import { CapitalShipPortrait } from "@/components/capital-ship-portrait/capital-ship-portrait";
 import { CounterVideo } from "@/components/counter-video/counter-video";
 import styles from "./fleet-page.module.css";
 
@@ -12,7 +13,7 @@ interface FleetPageProps {
 export const FleetPage = ({ ship, fleet }: FleetPageProps) => (
   <div className={ship.alignment === "light" ? styles.light : styles.dark}>
     <section className={styles.hero}>
-      <CapitalShipIcon silhouette={ship.silhouette} className={styles.heroIcon} />
+      <CapitalShipPortrait ship={ship} size="large" />
       <div>
         <span className={styles.faction}>{ship.faction}</span>
         <h1 className={styles.title}>{ship.name}</h1>
@@ -30,7 +31,7 @@ export const FleetPage = ({ ship, fleet }: FleetPageProps) => (
         <div className={styles.group}>
           <h3 className={styles.groupTitle}>Vaisseau mère</h3>
           <div className={`${styles.slot} ${styles.capital}`}>
-            <CapitalShipIcon silhouette={ship.silhouette} className={styles.slotIcon} />
+            <CapitalShipPortrait ship={ship} size="small" />
             <span className={styles.slotName}>{ship.name}</span>
           </div>
         </div>
