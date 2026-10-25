@@ -18,6 +18,7 @@ export interface CapitalShip {
 /**
  * Images hébergées par swgoh.gg (chargées directement par le navigateur, rien ne passe par notre serveur).
  * Si une URL ne répond pas, la silhouette SVG et les initiales du pilote sont affichées à la place.
+ * URL vérifiées : profundity, stardestroyer (Executrix), chimaera, ackbaradmiral. Les autres sont à confirmer.
  */
 const swgohAsset = (texture: string) =>
   `https://game-assets.swgoh.gg/textures/tex.charui_${texture}.png`;
@@ -32,7 +33,7 @@ export const capitalShips: CapitalShip[] = [
   { slug: "malevolence", name: "Malevolence", commander: "General Grievous", faction: "Séparatistes", alignment: "dark", silhouette: "crescent", image: swgohAsset("malevolence"), pilotImage: swgohAsset("grievous") },
   { slug: "negotiator", name: "Negotiator", commander: "General Kenobi", faction: "République", alignment: "light", silhouette: "wedge", image: swgohAsset("negotiator"), pilotImage: swgohAsset("obiwangeneral") },
   { slug: "endurance", name: "Endurance", commander: "Mace Windu", faction: "République", alignment: "light", silhouette: "wedge", image: swgohAsset("jedicruiser_mace"), pilotImage: swgohAsset("macewindu") },
-  { slug: "home-one", name: "Home One", commander: "Admiral Ackbar", faction: "Rebelles", alignment: "light", silhouette: "cruiser", image: swgohAsset("moncalamaricruiser"), pilotImage: swgohAsset("ackbar") },
+  { slug: "home-one", name: "Home One", commander: "Admiral Ackbar", faction: "Rebelles", alignment: "light", silhouette: "cruiser", image: swgohAsset("moncalamaricruiser"), pilotImage: swgohAsset("ackbaradmiral") },
   { slug: "raddus", name: "Raddus", commander: "Admiral Holdo", faction: "Résistance", alignment: "light", silhouette: "cruiser", image: swgohAsset("raddus"), pilotImage: swgohAsset("holdo") },
 ];
 
