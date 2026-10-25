@@ -41,20 +41,13 @@ const ExternalImage = ({ src, alt, className, fallback }: ExternalImageProps) =>
   );
 };
 
-const getInitials = (name: string) =>
-  name
-    .split(" ")
-    .map((word) => word[0])
-    .slice(-2)
-    .join("");
-
 interface CapitalShipPortraitProps {
   ship: CapitalShip;
   size?: "small" | "medium" | "large";
   className?: string;
 }
 
-/** Vignette du vaisseau avec la tête du pilote dans le coin */
+/** Vignette du vaisseau */
 export const CapitalShipPortrait = ({ ship, size = "medium", className }: CapitalShipPortraitProps) => (
   <div className={`${styles.portrait} ${styles[size]} ${className ?? ""}`}>
     <ExternalImage
@@ -63,12 +56,5 @@ export const CapitalShipPortrait = ({ ship, size = "medium", className }: Capita
       className={styles.ship}
       fallback={<CapitalShipIcon silhouette={ship.silhouette} className={styles.fallback} />}
     />
-    <span className={styles.pilot} title={ship.commander}>
-      <ExternalImage
-        src={ship.pilotImage}
-        alt={ship.commander}
-        fallback={<span className={styles.initials}>{getInitials(ship.commander)}</span>}
-      />
-    </span>
   </div>
 );
