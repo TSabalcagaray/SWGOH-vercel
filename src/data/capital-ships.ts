@@ -16,7 +16,7 @@ export interface CapitalShip {
 /**
  * Images hébergées par swgoh.gg (chargées directement par le navigateur, rien ne passe par notre serveur).
  * Si une URL ne répond pas, la silhouette SVG est affichée à la place.
- * URL vérifiées : profundity, stardestroyer (Executrix), chimaera. Les autres sont à confirmer.
+ * Toutes les URL ont été vérifiées.
  */
 const swgohAsset = (texture: string) =>
   `https://game-assets.swgoh.gg/textures/tex.charui_${texture}.png`;
@@ -29,9 +29,9 @@ export const capitalShips: CapitalShip[] = [
   { slug: "chimaera", name: "Chimaera", commander: "Grand Admiral Thrawn", faction: "Empire", alignment: "dark", silhouette: "wedge", image: swgohAsset("chimaera") },
   { slug: "finalizer", name: "Finalizer", commander: "General Hux", faction: "Premier Ordre", alignment: "dark", silhouette: "wedge", image: swgohAsset("finalizer") },
   { slug: "malevolence", name: "Malevolence", commander: "General Grievous", faction: "Séparatistes", alignment: "dark", silhouette: "crescent", image: swgohAsset("malevolence") },
-  { slug: "negotiator", name: "Negotiator", commander: "General Kenobi", faction: "République", alignment: "light", silhouette: "wedge", image: swgohAsset("negotiator") },
+  { slug: "negotiator", name: "Negotiator", commander: "General Kenobi", faction: "République", alignment: "light", silhouette: "wedge", image: swgohAsset("venator") },
   { slug: "endurance", name: "Endurance", commander: "Mace Windu", faction: "République", alignment: "light", silhouette: "wedge", image: swgohAsset("jedicruiser_mace") },
-  { slug: "home-one", name: "Home One", commander: "Admiral Ackbar", faction: "Rebelles", alignment: "light", silhouette: "cruiser", image: swgohAsset("moncalamaricruiser") },
+  { slug: "home-one", name: "Home One", commander: "Admiral Ackbar", faction: "Rebelles", alignment: "light", silhouette: "cruiser", image: swgohAsset("moncalamarilibertycruiser") },
   { slug: "raddus", name: "Raddus", commander: "Admiral Holdo", faction: "Résistance", alignment: "light", silhouette: "cruiser", image: swgohAsset("raddus") },
 ];
 
