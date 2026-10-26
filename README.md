@@ -20,6 +20,11 @@ Les fonds de la page d'entrée sont dans `public/images/` (`characters-bg.svg`, 
 Pour utiliser tes propres images, remplace ces fichiers ou change les chemins des images de fond
 dans `src/components/split-home/split-home.tsx`.
 
+## Données du jeu
+
+Les noms officiels (anglais / français), les équipages et les images des unités sont générés depuis
+swgoh-comlink avec `yarn gamedata`. Voir [docs/game-data.md](docs/game-data.md).
+
 ## Développement
 
 ```bash
