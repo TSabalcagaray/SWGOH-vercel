@@ -10,24 +10,24 @@ import { T, UnitName } from "@/i18n/locale-provider";
 import { RateBadge } from "./rate-badge";
 
 /** Vert à partir de 80 % de moyenne, orange à partir de 60 %, rouge en dessous */
-const getRateTone = ([min, max]: [number, number]) => {
+export const getRateTone = ([min, max]: [number, number]) => {
   const average = (min + max) / 2;
   if (average >= 80) return "text-rate-high";
   if (average >= 60) return "text-rate-medium";
   return "text-rate-low";
 };
 
-const shipKindClass = {
+export const shipKindClass = {
   starter: "border-2 border-starter bg-[radial-gradient(ellipse_at_top,rgb(255_215_106/0.14),transparent_70%)] text-starter",
   reinforcement: "border border-dashed border-white/15 opacity-80",
 };
 
-const badgeKindClass = {
+export const badgeKindClass = {
   starter: "border-starter bg-starter text-[#1a1204]",
   reinforcement: "border-white/25 bg-badge",
 };
 
-const formatRate = ([min, max]: [number, number]) => (min === max ? `${min} %` : `${min}–${max} %`);
+export const formatRate = ([min, max]: [number, number]) => (min === max ? `${min} %` : `${min}–${max} %`);
 
 interface ShipRowProps {
   names: string[];
@@ -62,9 +62,11 @@ interface CounterCardProps {
   counter: Counter;
   capitalShip: CapitalShip;
   alsoBeats: CapitalShip[];
+  /** Affiché en haut de la carte (ex. switch entre variantes) */
+  toolbar?: React.ReactNode;
 }
 
-export const CounterCard = ({ counter, capitalShip, alsoBeats }: CounterCardProps) => {
+export const CounterCard = ({ counter, capitalShip, alsoBeats, toolbar }: CounterCardProps) => {
   const { starters, reinforcements } = counter.lineup;
 
   return (
@@ -72,6 +74,7 @@ export const CounterCard = ({ counter, capitalShip, alsoBeats }: CounterCardProp
       className={`${capitalShip.alignment === "light" ? "accent-light" : "accent-dark"} group/card grid grid-cols-2 items-start gap-6 rounded-[14px] border border-white/15 bg-space/75 p-4 max-[800px]:grid-cols-1`}
     >
       <div className="flex min-w-0 flex-col gap-4">
+        {toolbar}
         <header className="flex items-center gap-3.5">
           <CrewAvatar pilots={[capitalShip.commander]} size="small">
             <CapitalShipPortrait ship={capitalShip} size="tiny" />

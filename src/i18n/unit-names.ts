@@ -14,6 +14,7 @@ const frenchNames: Record<string, string> = {
   "Imperial TIE Bomber": "Bombardier TIE impérial",
   "Rebel B-wing": "B-wing rebelle",
   "Millennium Falcon": "Faucon Millenium",
+  "Han's Millennium Falcon": "Faucon Millenium de Han",
   "Biggs Darklighter's X-wing": "X-wing de Biggs Darklighter",
   "Rebel Y-wing": "Y-wing rebelle",
   "Bistan's U-wing": "U-wing de Bistan",

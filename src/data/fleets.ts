@@ -35,6 +35,16 @@ const exampleFleet: Fleet = {
   isExample: true,
 };
 
+const leviathanVsProfundity = (fourth: string): Lineup => ({
+  starters: ["Fury-class Interceptor", "B-28 Extinction-class Bomber", "TIE Dagger"],
+  reinforcements: [fourth, "Mark VI Interceptor"],
+});
+
+const profundityLineup: Lineup = {
+  starters: ["Han's Millennium Falcon", "Outrider", "Rebel Y-wing"],
+  reinforcements: ["Rogue One", "Ghost", "Phantom II"],
+};
+
 /** Flottes par slug de capital ship. Tant qu'une flotte n'est pas renseignée, l'exemple est affiché. */
 const fleets: Record<string, Fleet> = {
   leviathan: {
@@ -72,6 +82,22 @@ const fleets: Record<string, Fleet> = {
         lineup: {
           starters: ["Scythe", "TIE Advanced x1", "Imperial TIE Bomber"],
           reinforcements: ["Rebel B-wing", "TIE Defender"],
+        },
+      },
+    ],
+  },
+  profundity: {
+    offense: profundityLineup,
+    counters: [
+      { capitalShip: "leviathan", successRate: [100, 100], lineup: leviathanVsProfundity("Scimitar") },
+      { capitalShip: "leviathan", successRate: [100, 100], lineup: leviathanVsProfundity("Sith Fighter") },
+      { capitalShip: "profundity", successRate: [95, 95], lineup: profundityLineup },
+      {
+        capitalShip: "profundity",
+        successRate: [80, 80],
+        lineup: {
+          starters: ["Han's Millennium Falcon", "Outrider", "Rebel Y-wing"],
+          reinforcements: ["Rogue One", "Imperial TIE Bomber"],
         },
       },
     ],
