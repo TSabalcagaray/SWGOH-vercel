@@ -8,14 +8,23 @@ import { ShipThumb } from "@/components/ship-thumb/ship-thumb";
 import { UnitStats } from "@/components/unit-stats/unit-stats";
 import { T, UnitName } from "@/i18n/locale-provider";
 import { RateBadge } from "./rate-badge";
-import styles from "./counter-card.module.css";
 
 /** Vert à partir de 80 % de moyenne, orange à partir de 60 %, rouge en dessous */
 const getRateTone = ([min, max]: [number, number]) => {
   const average = (min + max) / 2;
-  if (average >= 80) return styles.high;
-  if (average >= 60) return styles.medium;
-  return styles.low;
+  if (average >= 80) return "text-rate-high";
+  if (average >= 60) return "text-rate-medium";
+  return "text-rate-low";
+};
+
+const shipKindClass = {
+  starter: "border-2 border-starter bg-[radial-gradient(ellipse_at_top,rgb(255_215_106/0.14),transparent_70%)] text-starter",
+  reinforcement: "border border-dashed border-white/15 opacity-80",
+};
+
+const badgeKindClass = {
+  starter: "border-starter bg-starter text-[#1a1204]",
+  reinforcement: "border-white/25 bg-badge",
 };
 
 const formatRate = ([min, max]: [number, number]) => (min === max ? `${min} %` : `${min}–${max} %`);
@@ -26,12 +35,17 @@ interface ShipRowProps {
 }
 
 const ShipRow = ({ names, kind }: ShipRowProps) => (
-  <ol className={styles.lineup}>
+  <ol className="grid grid-cols-3 gap-2">
     {names.map((name, index) => (
-      <li key={name} className={`${styles.ship} ${styles[kind]}`}>
-        <span className={styles.badge}>{kind === "starter" ? index + 1 : `R${index + 1}`}</span>
+      <li
+        key={name}
+        className={`${shipKindClass[kind]} relative flex min-h-16 flex-col items-center justify-center gap-1 rounded-[10px] px-1.5 pt-3.5 pb-2 text-center`}
+      >
+        <span
+          className={`${badgeKindClass[kind]} absolute -top-[9px] left-1/2 -translate-x-1/2 rounded-full border px-[7px] py-px text-[0.68rem] font-bold`}
+        >{kind === "starter" ? index + 1 : `R${index + 1}`}</span>
         <ShipThumb name={name} size="small" />
-        <span className={styles.shipName}>
+        <span className="text-[0.8rem] leading-[1.2] text-white">
           <UnitName name={name} />
         </span>
         <UnitStats shipName={name} pilots={getShipPilots(name)} />
@@ -50,44 +64,52 @@ export const CounterCard = ({ counter, capitalShip, alsoBeats }: CounterCardProp
   const { starters, reinforcements } = counter.lineup;
 
   return (
-    <article className={`${styles.card} ${capitalShip.alignment === "light" ? styles.light : styles.dark}`}>
-      <div className={styles.details}>
-        <header className={styles.header}>
+    <article
+      className={`${capitalShip.alignment === "light" ? "accent-light" : "accent-dark"} grid grid-cols-2 items-start gap-6 rounded-[14px] border border-white/15 bg-space/75 p-4 max-[800px]:grid-cols-1`}
+    >
+      <div className="flex min-w-0 flex-col gap-4">
+        <header className="flex items-center gap-3.5">
           <CapitalShipPortrait ship={capitalShip} size="tiny" />
-          <div className={styles.heading}>
-            <h3 className={styles.name}>
-              <Link href={`/vaisseaux/${capitalShip.slug}`}>{capitalShip.name}</Link>
+          <div className="flex min-w-0 flex-1 flex-col items-start gap-1">
+            <h3 className="text-[1.15rem] font-extrabold tracking-[0.08em] uppercase">
+              <Link href={`/vaisseaux/${capitalShip.slug}`} className="hover:text-(--accent)">
+                {capitalShip.name}
+              </Link>
             </h3>
-            <UnitStats shipName={capitalShip.name} pilots={[capitalShip.commander]} />
+            <UnitStats shipName={capitalShip.name} pilots={[capitalShip.commander]} align="start" />
           </div>
           {counter.successRate && (
-            <RateBadge className={`${styles.rate} ${getRateTone(counter.successRate)}`}>
+            <RateBadge
+              className={`${getRateTone(counter.successRate)} shrink-0 rounded-full border border-current bg-current/15 px-3 py-1 text-[0.9rem] font-bold whitespace-nowrap`}
+            >
               {formatRate(counter.successRate)}*
             </RateBadge>
           )}
         </header>
 
-        <div className={styles.rows}>
+        <div className="flex flex-col gap-4">
           <ShipRow names={starters} kind="starter" />
           {reinforcements.length > 0 && <ShipRow names={reinforcements} kind="reinforcement" />}
         </div>
 
         {alsoBeats.length > 0 && (
-          <p className={styles.alsoBeats}>
+          <p className="text-[0.85rem] opacity-85">
             <T k="counters.alsoBeats" />{" "}
             {alsoBeats.map((ship, index) => (
               <span key={ship.slug}>
                 {index > 0 && ", "}
-                <Link href={`/vaisseaux/${ship.slug}`}>{ship.name}</Link>
+                <Link href={`/vaisseaux/${ship.slug}`} className="font-semibold underline underline-offset-3">
+                  {ship.name}
+                </Link>
               </span>
             ))}
           </p>
         )}
 
-        {counter.notes && <p className={styles.notes}>{counter.notes}</p>}
+        {counter.notes && <p className="text-[0.9rem] leading-normal opacity-80">{counter.notes}</p>}
       </div>
 
-      <div className={styles.video}>
+      <div className="overflow-hidden rounded-[10px]">
         <CounterVideo url={counter.videoUrl} name={capitalShip.name} />
       </div>
     </article>

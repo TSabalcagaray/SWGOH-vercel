@@ -1,7 +1,6 @@
 "use client";
 
 import { useT } from "@/i18n/locale-provider";
-import styles from "./counter-video.module.css";
 
 interface CounterVideoProps {
   url?: string;
@@ -28,17 +27,20 @@ export const CounterVideo = ({ url, name }: CounterVideoProps) => {
 
   if (!videoId) {
     return (
-      <div className={`${styles.frame} ${styles.placeholder}`}>
-        <span className={styles.play} aria-hidden="true">▶</span>
+      <div className="relative flex aspect-video flex-col items-center justify-center gap-2 bg-[repeating-linear-gradient(-45deg,rgb(255_255_255/0.03)_0_12px,transparent_12px_24px),#050b16] text-[0.9rem] text-white/60">
+        <span className="grid size-14 place-items-center rounded-full border-2 border-white/40 pl-1 text-[1.2rem]" aria-hidden="true">
+          ▶
+        </span>
         <span>{t("video.soon")}</span>
       </div>
     );
   }
 
   return (
-    <div className={styles.frame}>
+    <div className="relative aspect-video bg-black">
       <iframe
         src={`https://www.youtube-nocookie.com/embed/${videoId}`}
+        className="absolute inset-0 size-full border-0"
         title={t("counters.videoTitle", { name })}
         loading="lazy"
         allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

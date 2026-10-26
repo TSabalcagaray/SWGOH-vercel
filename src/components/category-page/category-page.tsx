@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { DocumentTitle, T } from "@/i18n/locale-provider";
 import type { MessageKey } from "@/i18n/messages";
-import styles from "./category-page.module.css";
 
 interface CategoryPageProps {
   title: MessageKey;
@@ -9,15 +8,18 @@ interface CategoryPageProps {
 
 export const CategoryPage = ({ title }: CategoryPageProps) => {
   return (
-    <div className={styles.page}>
+    <div className="min-h-svh bg-white text-neutral-900">
       <DocumentTitle k={title} />
-      <header className={styles.header}>
-        <Link href="/" className={styles.back}>
+      <header className="mx-auto max-w-[1200px] px-4 py-6">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 rounded-full border border-black/12 px-4 py-2 text-[0.95rem] transition-colors hover:border-transparent hover:bg-neutral-100"
+        >
           ← <T k="nav.back" />
         </Link>
       </header>
-      <main className={styles.main}>
-        <h1 className={styles.title}>
+      <main className="mx-auto max-w-[1200px] px-4 pb-12">
+        <h1 className="text-[clamp(1.75rem,4vw,2.5rem)] font-bold">
           <T k={title} />
         </h1>
       </main>
