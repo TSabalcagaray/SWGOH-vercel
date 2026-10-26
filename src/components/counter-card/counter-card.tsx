@@ -61,7 +61,7 @@ export const CounterCard = ({ counter, capitalShip, alsoBeats }: CounterCardProp
               className={`${styles.rate} ${getRateTone(counter.successRate)}`}
               title="Estimation à partir des combats en GA"
             >
-              {formatRate(counter.successRate)}
+              {formatRate(counter.successRate)}*
             </span>
           )}
         </header>
