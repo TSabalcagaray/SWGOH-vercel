@@ -2,6 +2,7 @@
 
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { normalizeAllyCode, type Roster } from "@/lib/roster";
+import { swgohGgPlayerUrl, toRoster, type SwgohGgPlayer } from "@/lib/swgoh-gg";
 
 type Status = "idle" | "loading" | "ready" | "error";
 
@@ -42,6 +43,23 @@ const writeStored = (roster: Roster | null) => {
   }
 };
 
+class RosterError extends Error {}
+
+/**
+ * swgoh.gg bloque les requêtes venant des serveurs de Vercel (403) : le navigateur du visiteur
+ * l'interroge donc directement, et on ne passe par notre route /api/player qu'en secours.
+ */
+const fetchRoster = async (code: string): Promise<Roster> => {
+  const direct = await fetch(swgohGgPlayerUrl(code)).catch(() => null);
+  if (direct?.status === 404) throw new RosterError("Aucun joueur trouvé pour ce code allié.");
+  if (direct?.ok) return toRoster(code, (await direct.json()) as SwgohGgPlayer);
+
+  const response = await fetch(`/api/player/${code}`);
+  const body = await response.json();
+  if (!response.ok) throw new RosterError(body.error ?? "Chargement impossible.");
+  return body as Roster;
+};
+
 export const RosterProvider = ({ children }: { children: React.ReactNode }) => {
   const [roster, setRoster] = useState<Roster | null>(null);
   const [status, setStatus] = useState<Status>("idle");
@@ -52,14 +70,12 @@ export const RosterProvider = ({ children }: { children: React.ReactNode }) => {
     setStatus("loading");
     setError(null);
     try {
-      const response = await fetch(`/api/player/${code}`);
-      const body = await response.json();
-      if (!response.ok) throw new Error(body.error ?? "Chargement impossible.");
-      setRoster(body as Roster);
-      writeStored(body as Roster);
+      const loaded = await fetchRoster(code);
+      setRoster(loaded);
+      writeStored(loaded);
       setStatus("ready");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Chargement impossible.");
+      setError(err instanceof RosterError ? err.message : "Chargement impossible.");
       setStatus("error");
     }
   }, []);
