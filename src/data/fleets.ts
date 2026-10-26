@@ -45,7 +45,6 @@ const fleets: Record<string, Fleet> = {
     defense: {
       starters: ["Fury-class Interceptor", "B-28 Extinction-class Bomber", "TIE Dagger"],
       reinforcements: ["Scimitar"],
-      notes: "En défense, un seul renfort : le Scimitar.",
     },
     counters: [
       {
