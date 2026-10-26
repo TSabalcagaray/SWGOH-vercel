@@ -6,14 +6,15 @@ import type { Fleet, Lineup } from "@/data/fleets";
 import { getShipPilots } from "@/data/ships";
 import { ShipThumb } from "@/components/ship-thumb/ship-thumb";
 import { CapitalShipPortrait } from "@/components/capital-ship-portrait/capital-ship-portrait";
-import { UnitStats } from "@/components/unit-stats/unit-stats";
+import { CrewAvatar, ShipStars } from "@/components/unit-stats/unit-stats";
 import { useT } from "@/i18n/locale-provider";
 
 const groupClass = "flex flex-col gap-3 max-[600px]:w-full";
 const groupTitleClass = "text-[0.8rem] font-semibold tracking-[0.12em] uppercase opacity-70";
 const rowClass = "flex flex-wrap gap-3 max-[600px]:grid max-[600px]:grid-cols-3 max-[600px]:gap-x-2 max-[600px]:gap-y-4";
+// Hauteur fixe : tous les vaisseaux ont la même taille, avec ou sans pilote
 const slotClass =
-  "relative flex w-33 min-h-[150px] flex-col items-center justify-center gap-2 rounded-[14px] border border-white/15 bg-space/70 px-2.5 pt-4 pb-3 text-center max-[600px]:min-h-[130px] max-[600px]:w-auto";
+  "relative flex h-[204px] w-33 flex-col items-center gap-2 rounded-[14px] border border-white/15 bg-space/70 px-2.5 pt-5 pb-3 text-center max-[600px]:h-[184px] max-[600px]:w-auto";
 const slotNameClass = "text-[0.85rem] leading-tight text-white max-[600px]:text-xs";
 const badgeClass =
   "absolute -top-2.5 left-1/2 min-w-6.5 -translate-x-1/2 rounded-full border px-2 py-0.5 text-xs font-bold";
@@ -59,10 +60,14 @@ export const FleetFormation = ({ ship, fleet }: FleetFormationProps) => {
       <div className="mt-6 flex flex-wrap gap-8">
         <div className={groupClass}>
           <h3 className={groupTitleClass}>{t("fleet.capitalShip")}</h3>
-          <div className={`${slotClass} w-45 gap-3.5 border-(--accent) glow max-[600px]:w-full`}>
-            <CapitalShipPortrait ship={ship} size="small" />
+          <div className={`${slotClass} w-45 border-(--accent) glow max-[600px]:w-full`}>
+            <CrewAvatar pilots={[ship.commander]}>
+              <CapitalShipPortrait ship={ship} size="small" />
+            </CrewAvatar>
             <span className={slotNameClass}>{ship.name}</span>
-            <UnitStats shipName={ship.name} pilots={[ship.commander]} />
+            <span className="mt-auto">
+              <ShipStars shipName={ship.name} />
+            </span>
           </div>
         </div>
 
@@ -75,9 +80,13 @@ export const FleetFormation = ({ ship, fleet }: FleetFormationProps) => {
                 className={`${slotClass} border-2 border-starter bg-[radial-gradient(ellipse_at_top,rgb(255_215_106/0.18),rgb(2_6_15/0.8)_70%)] text-starter shadow-[0_0_20px_-4px_rgb(255_215_106/0.7)]`}
               >
                 <span className={`${badgeClass} border-starter bg-starter text-[#1a1204]`}>{index + 1}</span>
-                <ShipThumb name={name} />
+                <CrewAvatar pilots={getShipPilots(name)}>
+                  <ShipThumb name={name} />
+                </CrewAvatar>
                 <span className={slotNameClass}>{unit(name)}</span>
-                <UnitStats shipName={name} pilots={getShipPilots(name)} />
+                <span className="mt-auto">
+                  <ShipStars shipName={name} />
+                </span>
               </li>
             ))}
           </ol>
@@ -90,9 +99,13 @@ export const FleetFormation = ({ ship, fleet }: FleetFormationProps) => {
               {lineup.reinforcements.map((name, index) => (
                 <li key={name} className={`${slotClass} border-dashed opacity-75`}>
                   <span className={`${badgeClass} border-white/25 bg-badge`}>R{index + 1}</span>
-                  <ShipThumb name={name} />
+                  <CrewAvatar pilots={getShipPilots(name)}>
+                    <ShipThumb name={name} />
+                  </CrewAvatar>
                   <span className={slotNameClass}>{unit(name)}</span>
-                  <UnitStats shipName={name} pilots={getShipPilots(name)} />
+                  <span className="mt-auto">
+                    <ShipStars shipName={name} />
+                  </span>
                 </li>
               ))}
             </ol>

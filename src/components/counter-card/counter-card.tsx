@@ -5,7 +5,7 @@ import { getShipPilots } from "@/data/ships";
 import { CapitalShipPortrait } from "@/components/capital-ship-portrait/capital-ship-portrait";
 import { CounterVideo } from "@/components/counter-video/counter-video";
 import { ShipThumb } from "@/components/ship-thumb/ship-thumb";
-import { UnitStats } from "@/components/unit-stats/unit-stats";
+import { CrewAvatar, ShipStars } from "@/components/unit-stats/unit-stats";
 import { T, UnitName } from "@/i18n/locale-provider";
 import { RateBadge } from "./rate-badge";
 
@@ -39,16 +39,20 @@ const ShipRow = ({ names, kind }: ShipRowProps) => (
     {names.map((name, index) => (
       <li
         key={name}
-        className={`${shipKindClass[kind]} relative flex min-h-16 flex-col items-center justify-center gap-1 rounded-[10px] px-1.5 pt-3.5 pb-2 text-center`}
+        className={`${shipKindClass[kind]} relative flex h-[150px] flex-col items-center gap-1.5 rounded-[10px] px-1.5 pt-4 pb-2 text-center`}
       >
         <span
           className={`${badgeKindClass[kind]} absolute -top-[9px] left-1/2 -translate-x-1/2 rounded-full border px-[7px] py-px text-[0.68rem] font-bold`}
         >{kind === "starter" ? index + 1 : `R${index + 1}`}</span>
-        <ShipThumb name={name} size="small" />
+        <CrewAvatar pilots={getShipPilots(name)} size="small">
+          <ShipThumb name={name} size="small" />
+        </CrewAvatar>
         <span className="text-[0.8rem] leading-[1.2] text-white">
           <UnitName name={name} />
         </span>
-        <UnitStats shipName={name} pilots={getShipPilots(name)} />
+        <span className="mt-auto">
+          <ShipStars shipName={name} />
+        </span>
       </li>
     ))}
   </ol>
@@ -69,14 +73,16 @@ export const CounterCard = ({ counter, capitalShip, alsoBeats }: CounterCardProp
     >
       <div className="flex min-w-0 flex-col gap-4">
         <header className="flex items-center gap-3.5">
-          <CapitalShipPortrait ship={capitalShip} size="tiny" />
+          <CrewAvatar pilots={[capitalShip.commander]} size="small">
+            <CapitalShipPortrait ship={capitalShip} size="tiny" />
+          </CrewAvatar>
           <div className="flex min-w-0 flex-1 flex-col items-start gap-1">
             <h3 className="text-[1.15rem] font-extrabold tracking-[0.08em] uppercase">
               <Link href={`/vaisseaux/${capitalShip.slug}`} className="hover:text-(--accent)">
                 {capitalShip.name}
               </Link>
             </h3>
-            <UnitStats shipName={capitalShip.name} pilots={[capitalShip.commander]} align="start" />
+            <ShipStars shipName={capitalShip.name} />
           </div>
           {counter.successRate && (
             <RateBadge

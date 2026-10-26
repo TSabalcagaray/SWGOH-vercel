@@ -49,11 +49,6 @@
     0 0 40px var(--accent);
 }
 
-/* Losange de relique, comme en jeu */
-@utility relic-shape {
-  clip-path: polygon(12% 0, 88% 0, 100% 50%, 88% 100%, 12% 100%, 0 50%);
-}
-
 @layer base {
   /* Interligne du navigateur, plutôt que le 1.5 de Tailwind */
   html {

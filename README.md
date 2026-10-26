@@ -12,7 +12,7 @@ Site de préparation de teams SWGOH (à la manière de swgoh.gg) : escouades, co
 
 Le site utilise [Tailwind CSS](https://tailwindcss.com) : les styles sont écrits directement dans les composants.
 Les couleurs du site (`sith`, `jedi`, `starter`, `space`…) et les quelques effets réutilisés (`glow`, `text-glow`,
-`relic-shape`, `accent-light` / `accent-dark`) sont définis dans `src/app/globals.css`.
+`accent-light` / `accent-dark`) sont définis dans `src/app/globals.css`.
 
 ## Visuels
 
