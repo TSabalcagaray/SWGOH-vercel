@@ -1,4 +1,5 @@
 import { swgohAsset } from "@/lib/swgoh-gg";
+import type { MessageKey } from "@/i18n/messages";
 
 export type Alignment = "light" | "dark";
 
@@ -7,8 +8,10 @@ export type Silhouette = "wedge" | "cruiser" | "crescent";
 export interface CapitalShip {
   slug: string;
   name: string;
+  /** Nom anglais du commandant (traduit à l'affichage) */
   commander: string;
-  faction: string;
+  /** Clé de traduction de la faction */
+  faction: MessageKey;
   alignment: Alignment;
   silhouette: Silhouette;
   /** Vignette du vaisseau (URL externe) */
@@ -22,17 +25,17 @@ export interface CapitalShip {
  */
 
 export const capitalShips: CapitalShip[] = [
-  { slug: "executor", name: "Executor", commander: "Admiral Piett", faction: "Empire", alignment: "dark", silhouette: "wedge", image: swgohAsset("executor") },
-  { slug: "leviathan", name: "Leviathan", commander: "Darth Malgus", faction: "Sith", alignment: "dark", silhouette: "crescent", image: swgohAsset("leviathan") },
-  { slug: "profundity", name: "Profundity", commander: "Admiral Raddus", faction: "Rebelles", alignment: "light", silhouette: "cruiser", image: swgohAsset("profundity") },
-  { slug: "executrix", name: "Executrix", commander: "Grand Moff Tarkin", faction: "Empire", alignment: "dark", silhouette: "wedge", image: swgohAsset("stardestroyer") },
-  { slug: "chimaera", name: "Chimaera", commander: "Grand Admiral Thrawn", faction: "Empire", alignment: "dark", silhouette: "wedge", image: swgohAsset("chimaera") },
-  { slug: "finalizer", name: "Finalizer", commander: "General Hux", faction: "Premier Ordre", alignment: "dark", silhouette: "wedge", image: swgohAsset("finalizer") },
-  { slug: "malevolence", name: "Malevolence", commander: "General Grievous", faction: "Séparatistes", alignment: "dark", silhouette: "crescent", image: swgohAsset("malevolence") },
-  { slug: "negotiator", name: "Negotiator", commander: "General Kenobi", faction: "République", alignment: "light", silhouette: "wedge", image: swgohAsset("negotiator") },
-  { slug: "endurance", name: "Endurance", commander: "Mace Windu", faction: "République", alignment: "light", silhouette: "wedge", image: swgohAsset("venator") },
-  { slug: "home-one", name: "Home One", commander: "Admiral Ackbar", faction: "Rebelles", alignment: "light", silhouette: "cruiser", image: swgohAsset("moncalamarilibertycruiser") },
-  { slug: "raddus", name: "Raddus", commander: "Admiral Holdo", faction: "Résistance", alignment: "light", silhouette: "cruiser", image: swgohAsset("raddus") },
+  { slug: "executor", name: "Executor", commander: "Admiral Piett", faction: "faction.empire", alignment: "dark", silhouette: "wedge", image: swgohAsset("executor") },
+  { slug: "leviathan", name: "Leviathan", commander: "Darth Malgus", faction: "faction.sith", alignment: "dark", silhouette: "crescent", image: swgohAsset("leviathan") },
+  { slug: "profundity", name: "Profundity", commander: "Admiral Raddus", faction: "faction.rebels", alignment: "light", silhouette: "cruiser", image: swgohAsset("profundity") },
+  { slug: "executrix", name: "Executrix", commander: "Grand Moff Tarkin", faction: "faction.empire", alignment: "dark", silhouette: "wedge", image: swgohAsset("stardestroyer") },
+  { slug: "chimaera", name: "Chimaera", commander: "Grand Admiral Thrawn", faction: "faction.empire", alignment: "dark", silhouette: "wedge", image: swgohAsset("chimaera") },
+  { slug: "finalizer", name: "Finalizer", commander: "General Hux", faction: "faction.firstOrder", alignment: "dark", silhouette: "wedge", image: swgohAsset("finalizer") },
+  { slug: "malevolence", name: "Malevolence", commander: "General Grievous", faction: "faction.separatists", alignment: "dark", silhouette: "crescent", image: swgohAsset("malevolence") },
+  { slug: "negotiator", name: "Negotiator", commander: "General Kenobi", faction: "faction.republic", alignment: "light", silhouette: "wedge", image: swgohAsset("negotiator") },
+  { slug: "endurance", name: "Endurance", commander: "Mace Windu", faction: "faction.republic", alignment: "light", silhouette: "wedge", image: swgohAsset("venator") },
+  { slug: "home-one", name: "Home One", commander: "Admiral Ackbar", faction: "faction.rebels", alignment: "light", silhouette: "cruiser", image: swgohAsset("moncalamarilibertycruiser") },
+  { slug: "raddus", name: "Raddus", commander: "Admiral Holdo", faction: "faction.resistance", alignment: "light", silhouette: "cruiser", image: swgohAsset("raddus") },
 ];
 
 export const getCapitalShip = (slug: string) =>

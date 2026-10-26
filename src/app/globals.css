@@ -1,31 +1,71 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --accent-characters: #ff4d4d;
-  --accent-ships: #4db8ff;
+@import "tailwindcss";
+
+/* Couleurs du site, utilisables en classes Tailwind (text-sith, border-starter, bg-space…) */
+@theme {
+  --font-sans: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+
+  --color-sith: #ff4d4d;
+  --color-jedi: #4db8ff;
+  --color-starter: #ffd76a;
+  --color-space: #02060f;
+  --color-panel: #0b1220;
+  --color-badge: #1b2638;
+  --color-missing: #ff8a8a;
+  --color-rate-high: #4ade80;
+  --color-rate-medium: #fbbf24;
+  --color-rate-low: #f87171;
+
+  --ease-swift: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-toast-in: toast-in 0.2s ease-out;
+
+  @keyframes toast-in {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+  }
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+/* Couleur d'accent selon le camp : à utiliser avec text-(--accent), border-(--accent)… */
+@utility accent-light {
+  --accent: var(--color-jedi);
 }
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
+@utility accent-dark {
+  --accent: var(--color-sith);
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Halo lumineux dans la couleur d'accent */
+@utility glow {
+  box-shadow: 0 0 24px -6px var(--accent);
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+@utility text-glow {
+  text-shadow:
+    0 0 12px var(--accent),
+    0 0 40px var(--accent);
+}
+
+/* Losange de relique, comme en jeu */
+@utility relic-shape {
+  clip-path: polygon(12% 0, 88% 0, 100% 50%, 88% 100%, 12% 100%, 0 50%);
+}
+
+@layer base {
+  /* Interligne du navigateur, plutôt que le 1.5 de Tailwind */
+  html {
+    line-height: normal;
+  }
+
+  html,
+  body {
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  body {
+    @apply bg-white font-sans text-neutral-900 antialiased;
+  }
 }
