@@ -29,8 +29,8 @@ export const capitalShips: CapitalShip[] = [
   { slug: "chimaera", name: "Chimaera", commander: "Grand Admiral Thrawn", faction: "Empire", alignment: "dark", silhouette: "wedge", image: swgohAsset("chimaera") },
   { slug: "finalizer", name: "Finalizer", commander: "General Hux", faction: "Premier Ordre", alignment: "dark", silhouette: "wedge", image: swgohAsset("finalizer") },
   { slug: "malevolence", name: "Malevolence", commander: "General Grievous", faction: "Séparatistes", alignment: "dark", silhouette: "crescent", image: swgohAsset("malevolence") },
-  { slug: "negotiator", name: "Negotiator", commander: "General Kenobi", faction: "République", alignment: "light", silhouette: "wedge", image: swgohAsset("venator") },
-  { slug: "endurance", name: "Endurance", commander: "Mace Windu", faction: "République", alignment: "light", silhouette: "wedge", image: swgohAsset("jedicruiser_mace") },
+  { slug: "negotiator", name: "Negotiator", commander: "General Kenobi", faction: "République", alignment: "light", silhouette: "wedge", image: swgohAsset("negotiator") },
+  { slug: "endurance", name: "Endurance", commander: "Mace Windu", faction: "République", alignment: "light", silhouette: "wedge", image: swgohAsset("venator") },
   { slug: "home-one", name: "Home One", commander: "Admiral Ackbar", faction: "Rebelles", alignment: "light", silhouette: "cruiser", image: swgohAsset("moncalamarilibertycruiser") },
   { slug: "raddus", name: "Raddus", commander: "Admiral Holdo", faction: "Résistance", alignment: "light", silhouette: "cruiser", image: swgohAsset("raddus") },
 ];
