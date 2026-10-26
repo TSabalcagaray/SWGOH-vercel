@@ -4,59 +4,12 @@ import { useState } from "react";
 import type { CapitalShip } from "@/data/capital-ships";
 import type { Fleet, Lineup } from "@/data/fleets";
 import { getShipPilots } from "@/data/ships";
-import { findUnit, type Roster, type RosterUnit } from "@/lib/roster";
 import { FighterIcon } from "@/components/ship-icon/ship-icon";
 import { CapitalShipPortrait } from "@/components/capital-ship-portrait/capital-ship-portrait";
-import { useRoster } from "@/components/roster/roster-provider";
+import { UnitStats } from "@/components/unit-stats/unit-stats";
 import styles from "./fleet-formation.module.css";
 
 type Mode = "offense" | "defense";
-
-const Stars = ({ count }: { count: number }) => (
-  <span className={styles.stars} aria-label={`${count} étoiles`}>
-    {"★".repeat(count)}
-    <span className={styles.starsOff}>{"★".repeat(Math.max(0, 7 - count))}</span>
-  </span>
-);
-
-const describeCharacter = (unit: RosterUnit) => {
-  if (unit.relic > 0) return `R${unit.relic}`;
-  return unit.gearLevel ? `G${unit.gearLevel}` : `Niv. ${unit.level}`;
-};
-
-interface UnitStatsProps {
-  roster: Roster | null;
-  shipName: string;
-  pilots: string[];
-}
-
-/** Niveau du vaisseau et de ses pilotes dans le roster du joueur */
-const UnitStats = ({ roster, shipName, pilots }: UnitStatsProps) => {
-  if (!roster) return null;
-  const ship = findUnit(roster, shipName, 2);
-
-  return (
-    <div className={styles.stats}>
-      {ship ? (
-        <>
-          <Stars count={ship.rarity} />
-          <span>Niv. {ship.level}</span>
-        </>
-      ) : (
-        <span className={styles.missing}>Non débloqué</span>
-      )}
-      {pilots.map((pilotName) => {
-        const pilot = findUnit(roster, pilotName, 1);
-        return (
-          <span key={pilotName} className={styles.pilot} title={pilotName}>
-            {pilotName.split(" ").at(-1)} :{" "}
-            {pilot ? `${pilot.rarity}★ ${describeCharacter(pilot)}` : <span className={styles.missing}>absent</span>}
-          </span>
-        );
-      })}
-    </div>
-  );
-};
 
 interface FleetFormationProps {
   ship: CapitalShip;
@@ -64,7 +17,6 @@ interface FleetFormationProps {
 }
 
 export const FleetFormation = ({ ship, fleet }: FleetFormationProps) => {
-  const { roster } = useRoster();
   const [mode, setMode] = useState<Mode>("offense");
   const lineup: Lineup = mode === "defense" && fleet.defense ? fleet.defense : fleet.offense;
 
@@ -98,7 +50,7 @@ export const FleetFormation = ({ ship, fleet }: FleetFormationProps) => {
           <div className={`${styles.slot} ${styles.capital}`}>
             <CapitalShipPortrait ship={ship} size="small" />
             <span className={styles.slotName}>{ship.name}</span>
-            <UnitStats roster={roster} shipName={ship.name} pilots={[ship.commander]} />
+            <UnitStats shipName={ship.name} pilots={[ship.commander]} />
           </div>
         </div>
 
@@ -110,7 +62,7 @@ export const FleetFormation = ({ ship, fleet }: FleetFormationProps) => {
                 <span className={styles.badge}>{index + 1}</span>
                 <FighterIcon className={styles.slotIcon} />
                 <span className={styles.slotName}>{name}</span>
-                <UnitStats roster={roster} shipName={name} pilots={getShipPilots(name)} />
+                <UnitStats shipName={name} pilots={getShipPilots(name)} />
               </li>
             ))}
           </ol>
@@ -125,7 +77,7 @@ export const FleetFormation = ({ ship, fleet }: FleetFormationProps) => {
                   <span className={styles.badge}>R{index + 1}</span>
                   <FighterIcon className={styles.slotIcon} />
                   <span className={styles.slotName}>{name}</span>
-                  <UnitStats roster={roster} shipName={name} pilots={getShipPilots(name)} />
+                  <UnitStats shipName={name} pilots={getShipPilots(name)} />
                 </li>
               ))}
             </ol>

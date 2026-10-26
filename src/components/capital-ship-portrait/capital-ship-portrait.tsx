@@ -43,7 +43,7 @@ const ExternalImage = ({ src, alt, className, fallback }: ExternalImageProps) =>
 
 interface CapitalShipPortraitProps {
   ship: CapitalShip;
-  size?: "small" | "medium" | "large";
+  size?: "tiny" | "small" | "medium" | "large";
   className?: string;
 }
 

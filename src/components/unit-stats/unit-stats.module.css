@@ -1,0 +1,25 @@
+.stats {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.72rem;
+  opacity: 0.9;
+}
+
+.stars {
+  letter-spacing: 1px;
+  color: #ffd76a;
+}
+
+.starsOff {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.pilot {
+  white-space: nowrap;
+}
+
+.missing {
+  color: #ff8a8a;
+}

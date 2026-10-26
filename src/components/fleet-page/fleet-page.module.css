@@ -69,25 +69,20 @@
   margin-top: 24px;
 }
 
-.counter {
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 14px;
-  background: rgba(2, 6, 15, 0.75);
-}
-
-.counterBody {
-  padding: 16px;
-}
-
-.counterTitle {
-  font-size: 1.05rem;
-  font-weight: 700;
-}
-
-.counterNotes {
-  margin-top: 6px;
-  font-size: 0.9rem;
-  line-height: 1.5;
+.legend {
+  margin-top: 12px;
+  font-size: 0.8rem;
   opacity: 0.8;
+}
+
+.high {
+  color: #4ade80;
+}
+
+.medium {
+  color: #fbbf24;
+}
+
+.low {
+  color: #f87171;
 }
