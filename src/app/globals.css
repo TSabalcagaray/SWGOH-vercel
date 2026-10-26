@@ -1,4 +1,5 @@
-@import "tailwindcss";
+/* Tailwind ne cherche les classes que dans src/ (pas dans le README ni ailleurs) */
+@import "tailwindcss" source("..");
 
 /* Couleurs du site, utilisables en classes Tailwind (text-sith, border-starter, bg-space…) */
 @theme {

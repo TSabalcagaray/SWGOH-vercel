@@ -17,7 +17,7 @@ Les couleurs du site (`sith`, `jedi`, `starter`, `space`…) et les quelques eff
 ## Visuels
 
 Les fonds de la page d'entrée sont dans `public/images/` (`characters-bg.svg`, `ships-bg.svg`).
-Pour utiliser tes propres images, remplace ces fichiers ou change les URL `bg-[url(...)]`
+Pour utiliser tes propres images, remplace ces fichiers ou change les chemins des images de fond
 dans `src/components/split-home/split-home.tsx`.
 
 ## Développement
