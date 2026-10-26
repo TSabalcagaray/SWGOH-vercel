@@ -95,10 +95,6 @@
   background: rgba(2, 6, 15, 0.7);
 }
 
-.slotIcon {
-  width: 64px;
-  color: rgba(255, 255, 255, 0.7);
-}
 
 .slotName {
   font-size: 0.85rem;
@@ -119,8 +115,12 @@
   box-shadow: 0 0 20px -4px rgba(255, 215, 106, 0.7);
 }
 
-.starter .slotIcon {
+.starter {
   color: #ffd76a;
+}
+
+.starter .slotName {
+  color: #fff;
 }
 
 .reinforcement {
@@ -164,9 +164,6 @@
     min-height: 130px;
   }
 
-  .slotIcon {
-    width: 48px;
-  }
 
   .slotName {
     font-size: 0.75rem;

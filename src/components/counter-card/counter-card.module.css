@@ -1,7 +1,9 @@
+/* Un counter par ligne : détails à gauche, vidéo à droite */
 .card {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 24px;
   padding: 16px;
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 14px;
@@ -14,6 +16,24 @@
 
 .dark {
   --accent: var(--accent-characters);
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.video {
+  overflow: hidden;
+  border-radius: 10px;
 }
 
 .header {
@@ -73,8 +93,8 @@
 .lineup {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
-  gap: 14px 8px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
 }
 
 .ship {
@@ -92,6 +112,7 @@
 }
 
 .starter {
+  color: #ffd76a;
   border: 2px solid #ffd76a;
   background: radial-gradient(ellipse at top, rgba(255, 215, 106, 0.14), transparent 70%);
 }
@@ -102,6 +123,7 @@
 }
 
 .shipName {
+  color: #fff;
   font-size: 0.8rem;
   line-height: 1.2;
 }
@@ -142,7 +164,8 @@
   opacity: 0.8;
 }
 
-.noVideo {
-  font-size: 0.8rem;
-  opacity: 0.5;
+@media (max-width: 800px) {
+  .card {
+    grid-template-columns: 1fr;
+  }
 }

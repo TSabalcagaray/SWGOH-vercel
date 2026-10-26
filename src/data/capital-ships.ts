@@ -1,3 +1,5 @@
+import { swgohAsset } from "@/lib/swgoh-gg";
+
 export type Alignment = "light" | "dark";
 
 export type Silhouette = "wedge" | "cruiser" | "crescent";
@@ -18,8 +20,6 @@ export interface CapitalShip {
  * Si une URL ne répond pas, la silhouette SVG est affichée à la place.
  * Toutes les URL ont été vérifiées.
  */
-const swgohAsset = (texture: string) =>
-  `https://game-assets.swgoh.gg/textures/tex.charui_${texture}.png`;
 
 export const capitalShips: CapitalShip[] = [
   { slug: "executor", name: "Executor", commander: "Admiral Piett", faction: "Empire", alignment: "dark", silhouette: "wedge", image: swgohAsset("executor") },

@@ -43,13 +43,14 @@ const fleets: Record<string, Fleet> = {
       reinforcements: ["Scimitar", "Sith Fighter", "Mark VI Interceptor"],
     },
     defense: {
-      starters: ["Scimitar"],
-      reinforcements: [],
-      notes: "En défense, le mieux est le Scimitar seul.",
+      starters: ["Fury-class Interceptor", "B-28 Extinction-class Bomber", "TIE Dagger"],
+      reinforcements: ["Scimitar"],
+      notes: "En défense, un seul renfort : le Scimitar.",
     },
     counters: [
       {
         capitalShip: "leviathan",
+        successRate: [100, 100],
         lineup: {
           starters: ["Fury-class Interceptor", "B-28 Extinction-class Bomber", "TIE Dagger"],
           reinforcements: ["Scimitar", "Mark VI Interceptor"],
