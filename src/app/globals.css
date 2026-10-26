@@ -49,6 +49,13 @@
     0 0 40px var(--accent);
 }
 
+/* Fond rayé de la vidéo en attente */
+@utility video-placeholder {
+  background:
+    repeating-linear-gradient(-45deg, rgb(255 255 255 / 0.03) 0 12px, transparent 12px 24px),
+    #050b16;
+}
+
 @layer base {
   /* Interligne du navigateur, plutôt que le 1.5 de Tailwind */
   html {

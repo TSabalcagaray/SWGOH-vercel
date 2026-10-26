@@ -27,7 +27,7 @@ export const CounterVideo = ({ url, name }: CounterVideoProps) => {
 
   if (!videoId) {
     return (
-      <div className="relative flex aspect-video flex-col items-center justify-center gap-2 bg-[repeating-linear-gradient(-45deg,rgb(255_255_255/0.03)_0_12px,transparent_12px_24px),#050b16] text-[0.9rem] text-white/60">
+      <div className="relative flex aspect-video flex-col items-center justify-center gap-2 video-placeholder text-[0.9rem] text-white/60">
         <span className="grid size-14 place-items-center rounded-full border-2 border-white/40 pl-1 text-[1.2rem]" aria-hidden="true">
           ▶
         </span>

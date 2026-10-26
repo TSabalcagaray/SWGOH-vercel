@@ -3,7 +3,6 @@ import { getAlsoBeats, type Fleet } from "@/data/fleets";
 import { FleetFormation } from "@/components/fleet-formation/fleet-formation";
 import { CapitalShipPortrait } from "@/components/capital-ship-portrait/capital-ship-portrait";
 import { CounterGroup, type CounterVariant } from "@/components/counter-card/counter-group";
-import { CounterChoiceCard } from "@/components/counter-card/counter-choice-card";
 import { T, UnitName } from "@/i18n/locale-provider";
 
 interface FleetPageProps {
@@ -78,26 +77,6 @@ export const FleetPage = ({ ship, fleet }: FleetPageProps) => {
           </ul>
         )}
       </section>
-
-      {groups.some(({ variants }) => variants.length > 1) && (
-        <section className="mt-12">
-          <h2 className="border-b border-white/15 pb-2 text-[1.4rem] font-bold tracking-widest uppercase">
-            <T k="counters.choiceTitle" />
-          </h2>
-          <p className="mt-3 text-[0.9rem] italic opacity-70">
-            <T k="counters.choiceHint" />
-          </p>
-          <ul className="mt-6 flex flex-col gap-6">
-            {groups
-              .filter(({ variants }) => variants.length > 1)
-              .map(({ capitalShip, variants }) => (
-                <li key={capitalShip.slug}>
-                  <CounterChoiceCard capitalShip={capitalShip} counters={variants.map(({ counter }) => counter)} />
-                </li>
-              ))}
-          </ul>
-        </section>
-      )}
     </div>
   );
 };

@@ -3,7 +3,6 @@ import { ExternalImage } from "@/components/external-image/external-image";
 import { FighterIcon } from "@/components/ship-icon/ship-icon";
 
 const sizes = {
-  tiny: "w-7",
   small: "w-13",
   medium: "w-22 max-[600px]:w-17",
 };

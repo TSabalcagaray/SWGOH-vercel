@@ -71,7 +71,7 @@ export const CounterCard = ({ counter, capitalShip, alsoBeats, toolbar }: Counte
 
   return (
     <article
-      className={`${capitalShip.alignment === "light" ? "accent-light" : "accent-dark"} group/card grid grid-cols-2 items-start gap-6 rounded-[14px] border border-white/15 bg-space/75 p-4 max-[800px]:grid-cols-1`}
+      className={`${capitalShip.alignment === "light" ? "accent-light" : "accent-dark"} group/card grid grid-cols-2 items-center gap-6 rounded-[14px] border border-white/15 bg-space/75 p-4 max-[800px]:grid-cols-1`}
     >
       <div className="flex min-w-0 flex-col gap-4">
         {toolbar}
