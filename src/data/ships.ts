@@ -9,15 +9,15 @@ interface ShipInfo {
 
 /**
  * Infos des vaisseaux, par nom tel qu'affiché dans le jeu.
- * Texture vérifiée : slave1. Les autres sont à confirmer (la silhouette s'affiche si l'image ne charge pas).
+ * Textures vérifiées : slave1, furyclassinterceptor, b28extinctionclassbomber, sithsupremacyclass. Les autres sont à confirmer (la silhouette s'affiche si l'image ne charge pas).
  */
 const ships: Record<string, ShipInfo> = {
-  "Fury-class Interceptor": { texture: "furyinterceptor" },
-  "B-28 Extinction-class Bomber": { texture: "b28bomber" },
+  "Fury-class Interceptor": { texture: "furyclassinterceptor" },
+  "B-28 Extinction-class Bomber": { texture: "b28extinctionclassbomber" },
   "TIE Dagger": { texture: "tiedagger" },
   Scimitar: { pilots: ["Darth Maul"], texture: "sithinfiltrator" },
   "Sith Fighter": { texture: "sithfighter" },
-  "Mark VI Interceptor": { texture: "markvi" },
+  "Mark VI Interceptor": { texture: "sithsupremacyclass" },
   "Punishing One": { pilots: ["Dengar"], texture: "punishingone" },
   "Razor Crest": { texture: "razorcrest" },
   "Xanadu Blood": { pilots: ["Cad Bane"], texture: "xanadublood" },
