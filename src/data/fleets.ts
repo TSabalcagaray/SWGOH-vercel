@@ -1,33 +1,89 @@
+export interface Lineup {
+  /** Vaisseaux de départ (3 au maximum) */
+  starters: string[];
+  /** Renforts, dans l'ordre d'appel */
+  reinforcements: string[];
+  notes?: string;
+}
+
 export interface Counter {
-  title: string;
+  /** Slug du capital ship utilisé pour le counter */
+  capitalShip: string;
+  lineup: Lineup;
+  /** Taux de réussite en %, sous forme de fourchette [min, max]. Absent = non renseigné. */
+  successRate?: [number, number];
   /** Lien YouTube (watch, youtu.be, shorts ou embed) */
   videoUrl?: string;
   notes?: string;
 }
 
 export interface Fleet {
-  /** Les 3 vaisseaux de départ */
-  starters: [string, string, string];
-  /** Les renforts, dans l'ordre d'appel */
-  reinforcements: string[];
+  offense: Lineup;
+  /** Composition en défense, si elle diffère de l'attaque */
+  defense?: Lineup;
   counters: Counter[];
   /** Flotte de démonstration, à remplacer par la vraie */
   isExample?: boolean;
 }
 
 const exampleFleet: Fleet = {
-  starters: ["Millennium Falcon", "Ghost", "Phantom II"],
-  reinforcements: ["Outrider", "Biggs Darklighter's X-wing", "Rebel Y-wing", "Bistan's U-wing"],
-  counters: [
-    {
-      title: "Counter d'exemple",
-      notes: "Ajoute ici le lien YouTube du counter et quelques notes (ordre des tirs, timing des renforts…).",
-    },
-  ],
+  offense: {
+    starters: ["Millennium Falcon", "Ghost", "Phantom II"],
+    reinforcements: ["Outrider", "Biggs Darklighter's X-wing", "Rebel Y-wing", "Bistan's U-wing"],
+  },
+  counters: [],
   isExample: true,
 };
 
 /** Flottes par slug de capital ship. Tant qu'une flotte n'est pas renseignée, l'exemple est affiché. */
-const fleets: Record<string, Fleet> = {};
+const fleets: Record<string, Fleet> = {
+  leviathan: {
+    offense: {
+      starters: ["Fury-class Interceptor", "B-28 Extinction-class Bomber", "TIE Dagger"],
+      reinforcements: ["Scimitar", "Sith Fighter", "Mark VI Interceptor"],
+    },
+    defense: {
+      starters: ["Scimitar"],
+      reinforcements: [],
+      notes: "En défense, le mieux est le Scimitar seul.",
+    },
+    counters: [
+      {
+        capitalShip: "leviathan",
+        lineup: {
+          starters: ["Fury-class Interceptor", "B-28 Extinction-class Bomber", "TIE Dagger"],
+          reinforcements: ["Scimitar", "Mark VI Interceptor"],
+        },
+      },
+      {
+        capitalShip: "executor",
+        successRate: [80, 90],
+        lineup: {
+          starters: ["Punishing One", "Razor Crest", "Xanadu Blood"],
+          reinforcements: ["Mark VI Interceptor", "Slave I"],
+        },
+      },
+      {
+        capitalShip: "home-one",
+        successRate: [60, 80],
+        lineup: {
+          starters: ["Scythe", "TIE Advanced x1", "Imperial TIE Bomber"],
+          reinforcements: ["Rebel B-wing", "TIE Defender"],
+        },
+      },
+    ],
+  },
+};
 
 export const getFleet = (slug: string): Fleet => fleets[slug] ?? exampleFleet;
+
+/** Deux counters sont « le même » s'ils partent du même capital ship avec les mêmes vaisseaux de départ */
+const sameCounter = (a: Counter, b: Counter) =>
+  a.capitalShip === b.capitalShip &&
+  [...a.lineup.starters].sort().join("|") === [...b.lineup.starters].sort().join("|");
+
+/** Autres flottes (slugs) que ce counter casse aussi */
+export const getAlsoBeats = (counter: Counter, currentSlug: string) =>
+  Object.entries(fleets)
+    .filter(([slug, fleet]) => slug !== currentSlug && fleet.counters.some((other) => sameCounter(other, counter)))
+    .map(([slug]) => slug);

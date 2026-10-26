@@ -61,103 +61,6 @@
   opacity: 0.7;
 }
 
-.formation {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 32px;
-  margin-top: 24px;
-}
-
-.group {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.groupTitle {
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  opacity: 0.7;
-}
-
-.row {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.slot {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: 132px;
-  min-height: 150px;
-  padding: 16px 10px 12px;
-  text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 14px;
-  background: rgba(2, 6, 15, 0.7);
-}
-
-.slotIcon {
-  width: 64px;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.slotName {
-  font-size: 0.85rem;
-  line-height: 1.25;
-}
-
-.capital {
-  width: 180px;
-  border-color: var(--accent);
-  gap: 14px;
-  box-shadow: 0 0 24px -6px var(--accent);
-}
-
-/* Les 3 vaisseaux de départ ressortent : bordure dorée, halo et badge numéroté */
-.starter {
-  border: 2px solid #ffd76a;
-  background: radial-gradient(ellipse at top, rgba(255, 215, 106, 0.18), rgba(2, 6, 15, 0.8) 70%);
-  box-shadow: 0 0 20px -4px rgba(255, 215, 106, 0.7);
-}
-
-.starter .slotIcon {
-  color: #ffd76a;
-}
-
-.reinforcement {
-  opacity: 0.75;
-  border-style: dashed;
-}
-
-.badge {
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  min-width: 26px;
-  padding: 2px 8px;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  background: #1b2638;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-}
-
-.starter .badge {
-  color: #1a1204;
-  background: #ffd76a;
-  border-color: #ffd76a;
-}
-
 .counters {
   list-style: none;
   display: grid;
@@ -166,50 +69,20 @@
   margin-top: 24px;
 }
 
-.counter {
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 14px;
-  background: rgba(2, 6, 15, 0.75);
-}
-
-.counterBody {
-  padding: 16px;
-}
-
-.counterTitle {
-  font-size: 1.05rem;
-  font-weight: 700;
-}
-
-.counterNotes {
-  margin-top: 6px;
-  font-size: 0.9rem;
-  line-height: 1.5;
+.legend {
+  margin-top: 12px;
+  font-size: 0.8rem;
   opacity: 0.8;
 }
 
-@media (max-width: 600px) {
-  .group {
-    width: 100%;
-  }
+.high {
+  color: #4ade80;
+}
 
-  .row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px 8px;
-  }
+.medium {
+  color: #fbbf24;
+}
 
-  .slot {
-    width: auto;
-    min-height: 130px;
-  }
-
-  .slotIcon {
-    width: 48px;
-  }
-
-  .slotName {
-    font-size: 0.75rem;
-  }
+.low {
+  color: #f87171;
 }
