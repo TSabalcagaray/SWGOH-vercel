@@ -10,7 +10,7 @@ export interface Counter {
   /** Slug du capital ship utilisé pour le counter */
   capitalShip: string;
   lineup: Lineup;
-  /** Taux de réussite en %, sous forme de fourchette [min, max]. Absent = non renseigné. */
+  /** Taux de réussite estimé en GA, en %, sous forme de fourchette [min, max]. Absent = non renseigné. */
   successRate?: [number, number];
   /** Lien YouTube (watch, youtu.be, shorts ou embed) */
   videoUrl?: string;
@@ -50,6 +50,7 @@ const fleets: Record<string, Fleet> = {
     counters: [
       {
         capitalShip: "leviathan",
+        videoUrl: "https://www.youtube.com/watch?v=W_JEgGAfgaA",
         successRate: [100, 100],
         lineup: {
           starters: ["Fury-class Interceptor", "B-28 Extinction-class Bomber", "TIE Dagger"],
@@ -58,6 +59,7 @@ const fleets: Record<string, Fleet> = {
       },
       {
         capitalShip: "executor",
+        videoUrl: "https://www.youtube.com/watch?v=ARtJF2lieVM",
         successRate: [80, 90],
         lineup: {
           starters: ["Punishing One", "Razor Crest", "Xanadu Blood"],
@@ -66,6 +68,7 @@ const fleets: Record<string, Fleet> = {
       },
       {
         capitalShip: "home-one",
+        videoUrl: "https://www.youtube.com/watch?v=cng1agMML8U",
         successRate: [60, 80],
         lineup: {
           starters: ["Scythe", "TIE Advanced x1", "Imperial TIE Bomber"],

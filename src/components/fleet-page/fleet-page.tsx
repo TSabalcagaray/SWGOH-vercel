@@ -34,7 +34,7 @@ export const FleetPage = ({ ship, fleet }: FleetPageProps) => (
       <h2 className={styles.sectionTitle}>Counters</h2>
       {fleet.counters.some((counter) => counter.successRate) && (
         <p className={styles.legend}>
-          Taux de réussite : <span className={styles.high}>80 % et plus</span> ·{" "}
+          Taux de réussite estimés à partir des combats en GA : <span className={styles.high}>80 % et plus</span> ·{" "}
           <span className={styles.medium}>60 à 79 %</span> · <span className={styles.low}>moins de 60 %</span>
         </p>
       )}
