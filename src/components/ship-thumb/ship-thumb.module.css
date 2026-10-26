@@ -1,5 +1,5 @@
 .thumb {
-  --size: 64px;
+  --size: 88px;
   display: grid;
   place-items: center;
   width: var(--size);
@@ -12,11 +12,17 @@
 }
 
 .small {
-  --size: 40px;
+  --size: 52px;
 }
 
 .medium {
-  --size: 64px;
+  --size: 88px;
+}
+
+@media (max-width: 600px) {
+  .medium {
+    --size: 68px;
+  }
 }
 
 .image {
