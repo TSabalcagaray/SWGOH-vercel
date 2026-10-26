@@ -12,17 +12,17 @@ interface ShipInfo {
  * Textures vérifiées : slave1, furyclassinterceptor, b28extinctionclassbomber, sithsupremacyclass. Les autres sont à confirmer (la silhouette s'affiche si l'image ne charge pas).
  */
 const ships: Record<string, ShipInfo> = {
-  "Fury-class Interceptor": { texture: "furyclassinterceptor" },
+  "Fury-class Interceptor": { pilots: ["Darth Malgus"], texture: "furyclassinterceptor" },
   "B-28 Extinction-class Bomber": { texture: "b28extinctionclassbomber" },
   "TIE Dagger": { texture: "tiedagger" },
   Scimitar: { pilots: ["Darth Maul"], texture: "sithinfiltrator" },
   "Sith Fighter": { texture: "sithfighter" },
-  "Mark VI Interceptor": { texture: "sithsupremacyclass" },
+  "Mark VI Interceptor": { pilots: ["Sith Empire Trooper"], texture: "sithsupremacyclass" },
   "Punishing One": { pilots: ["Dengar"], texture: "punishingone" },
-  "Razor Crest": { texture: "razorcrest" },
+  "Razor Crest": { pilots: ["The Mandalorian (Beskar Armor)"], texture: "razorcrest" },
   "Xanadu Blood": { pilots: ["Cad Bane"], texture: "xanadublood" },
   "Slave I": { pilots: ["Boba Fett"], texture: "slave1" },
-  Scythe: { texture: "scythe" },
+  Scythe: { pilots: ["Grand Inquisitor", "Fifth Brother"], texture: "scythe" },
   "TIE Advanced x1": { pilots: ["Darth Vader"], texture: "tieadvanced" },
   "Imperial TIE Bomber": { texture: "tiebomber" },
   "Rebel B-wing": { texture: "bwing" },

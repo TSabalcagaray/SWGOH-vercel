@@ -16,8 +16,11 @@ const Stars = ({ count }: { count: number }) => {
   );
 };
 
+/** Initiales de secours, sans la précision entre parenthèses (« The Mandalorian (Beskar Armor) » -> « TM ») */
 const getInitials = (name: string) =>
   name
+    .replace(/\(.*\)/, "")
+    .trim()
     .split(" ")
     .map((word) => word[0])
     .slice(-2)

@@ -26,9 +26,10 @@ const frenchNames: Record<string, string> = {
   "General Grievous": "Général Grievous",
   "General Kenobi": "Général Kenobi",
   "Admiral Ackbar": "Amiral Ackbar",
-  "Admiral Holdo": "Amiral Holdo",
   "Darth Maul": "Dark Maul",
   "Darth Vader": "Dark Vador",
+  "Grand Inquisitor": "Grand Inquisiteur",
+  "Fifth Brother": "Cinquième Frère",
 };
 
 export const unitName = (name: string, locale: Locale) =>

@@ -42,11 +42,6 @@ export const FleetPage = ({ ship, fleet }: FleetPageProps) => (
       <h2 className="border-b border-white/15 pb-2 text-[1.4rem] font-bold tracking-widest uppercase">
         <T k="counters.title" />
       </h2>
-      {fleet.counters.some((counter) => counter.successRate) && (
-        <p className="mt-3 text-[0.8rem] opacity-80">
-          <T k="counters.legend" />
-        </p>
-      )}
       {fleet.counters.length === 0 ? (
         <p className="mt-3 text-[0.9rem] italic opacity-70">
           <T k="counters.none" />

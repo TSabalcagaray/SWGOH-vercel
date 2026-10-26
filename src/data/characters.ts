@@ -15,7 +15,7 @@ const characterTextures: Record<string, string> = {
   "General Kenobi": "obiwangeneral",
   "Mace Windu": "macewindu",
   "Admiral Ackbar": "ackbaradmiral",
-  "Admiral Holdo": "holdo",
+  "Amilyn Holdo": "holdo",
   "Darth Maul": "maul",
   Dengar: "dengar",
   "Cad Bane": "cadbane",

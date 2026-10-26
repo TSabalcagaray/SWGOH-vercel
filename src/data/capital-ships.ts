@@ -35,7 +35,7 @@ export const capitalShips: CapitalShip[] = [
   { slug: "negotiator", name: "Negotiator", commander: "General Kenobi", faction: "faction.republic", alignment: "light", silhouette: "wedge", image: swgohAsset("negotiator") },
   { slug: "endurance", name: "Endurance", commander: "Mace Windu", faction: "faction.republic", alignment: "light", silhouette: "wedge", image: swgohAsset("venator") },
   { slug: "home-one", name: "Home One", commander: "Admiral Ackbar", faction: "faction.rebels", alignment: "light", silhouette: "cruiser", image: swgohAsset("moncalamarilibertycruiser") },
-  { slug: "raddus", name: "Raddus", commander: "Admiral Holdo", faction: "faction.resistance", alignment: "light", silhouette: "cruiser", image: swgohAsset("raddus") },
+  { slug: "raddus", name: "Raddus", commander: "Amilyn Holdo", faction: "faction.resistance", alignment: "light", silhouette: "cruiser", image: swgohAsset("raddus") },
 ];
 
 export const getCapitalShip = (slug: string) =>

@@ -80,9 +80,9 @@ export const CounterCard = ({ counter, capitalShip, alsoBeats }: CounterCardProp
           </div>
           {counter.successRate && (
             <RateBadge
-              className={`${getRateTone(counter.successRate)} shrink-0 rounded-full border border-current bg-current/15 px-3 py-1 text-[0.9rem] font-bold whitespace-nowrap`}
+              className={`${getRateTone(counter.successRate)} block rounded-full border border-current bg-current/15 px-3 py-1 text-[0.9rem] font-bold whitespace-nowrap`}
             >
-              {formatRate(counter.successRate)}*
+              {formatRate(counter.successRate)}
             </RateBadge>
           )}
         </header>
