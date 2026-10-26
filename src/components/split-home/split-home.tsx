@@ -1,17 +1,19 @@
 import Link from "next/link";
+import { T } from "@/i18n/locale-provider";
+import type { MessageKey } from "@/i18n/messages";
 import styles from "./split-home.module.css";
 
-const sections = [
+const sections: { href: string; label: MessageKey; subtitle: MessageKey; className: string }[] = [
   {
     href: "/personnages",
-    label: "Personnages",
-    subtitle: "Escouades, counters & vidéos",
+    label: "home.characters",
+    subtitle: "home.charactersSubtitle",
     className: styles.characters,
   },
   {
     href: "/vaisseaux",
-    label: "Vaisseaux",
-    subtitle: "Flottes, counters & vidéos",
+    label: "home.ships",
+    subtitle: "home.shipsSubtitle",
     className: styles.ships,
   },
 ];
@@ -28,8 +30,12 @@ export const SplitHome = () => {
           <div className={styles.background} aria-hidden="true" />
           <div className={styles.overlay} aria-hidden="true" />
           <div className={styles.content}>
-            <h2 className={styles.label}>{section.label}</h2>
-            <p className={styles.subtitle}>{section.subtitle}</p>
+            <h2 className={styles.label}>
+              <T k={section.label} />
+            </h2>
+            <p className={styles.subtitle}>
+              <T k={section.subtitle} />
+            </p>
           </div>
         </Link>
       ))}

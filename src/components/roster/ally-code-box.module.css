@@ -15,6 +15,12 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
+.form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .input {
   width: 120px;
   padding: 6px 0;
@@ -32,7 +38,8 @@
 }
 
 .submit,
-.clear {
+.clear,
+.gear {
   padding: 6px 14px;
   font: inherit;
   font-size: 0.85rem;
@@ -60,8 +67,69 @@
   background: rgba(255, 255, 255, 0.12);
 }
 
+.settings {
+  position: relative;
+}
+
+.gear {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.gear svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.4s ease;
+}
+
+.gear:hover svg,
+.gear[aria-expanded="true"] svg {
+  transform: rotate(60deg);
+}
+
+.gear:hover,
 .clear:hover {
   background: rgba(255, 255, 255, 0.25);
+}
+
+.menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 130px;
+  padding: 6px;
+  list-style: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  background: rgba(2, 6, 15, 0.95);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.menu button {
+  width: 100%;
+  padding: 8px 12px;
+  font: inherit;
+  font-size: 0.85rem;
+  text-align: left;
+  color: #fff;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.menu button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.menu .selected {
+  color: var(--accent-ships);
+  font-weight: 700;
 }
 
 .player {
@@ -105,7 +173,13 @@
 }
 
 @media (max-width: 400px) {
-  .input {
+  .form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.input {
     width: 92px;
   }
 

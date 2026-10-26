@@ -2,14 +2,20 @@
 
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { normalizeAllyCode, type Roster } from "@/lib/roster";
+import type { MessageKey, MessageParams } from "@/i18n/messages";
 import { swgohGgPlayerUrl, toRoster, type SwgohGgPlayer } from "@/lib/swgoh-gg";
 
 type Status = "idle" | "loading" | "ready" | "error";
 
+export interface RosterErrorInfo {
+  key: MessageKey;
+  params?: MessageParams;
+}
+
 interface RosterContextValue {
   roster: Roster | null;
   status: Status;
-  error: string | null;
+  error: RosterErrorInfo | null;
   load: (allyCode: string) => Promise<void>;
   clear: () => void;
   dismissError: () => void;
@@ -44,7 +50,11 @@ const writeStored = (roster: Roster | null) => {
   }
 };
 
-class RosterError extends Error {}
+class RosterError extends Error {
+  constructor(readonly info: RosterErrorInfo) {
+    super(info.key);
+  }
+}
 
 /**
  * swgoh.gg bloque les requêtes venant des serveurs de Vercel (403) : le navigateur du visiteur
@@ -52,19 +62,21 @@ class RosterError extends Error {}
  */
 const fetchRoster = async (code: string): Promise<Roster> => {
   const direct = await fetch(swgohGgPlayerUrl(code)).catch(() => null);
-  if (direct?.status === 404) throw new RosterError("Aucun joueur trouvé pour ce code allié.");
+  if (direct?.status === 404) throw new RosterError({ key: "allyCode.notFound" });
   if (direct?.ok) return toRoster(code, (await direct.json()) as SwgohGgPlayer);
 
   const response = await fetch(`/api/player/${code}`);
   const body = await response.json();
-  if (!response.ok) throw new RosterError(body.error ?? "Chargement impossible.");
+  if (!response.ok) {
+    throw new RosterError({ key: body.error ?? "allyCode.failed", params: { status: body.status ?? response.status } });
+  }
   return body as Roster;
 };
 
 export const RosterProvider = ({ children }: { children: React.ReactNode }) => {
   const [roster, setRoster] = useState<Roster | null>(null);
   const [status, setStatus] = useState<Status>("idle");
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<RosterErrorInfo | null>(null);
 
   const load = useCallback(async (allyCode: string) => {
     const code = normalizeAllyCode(allyCode);
@@ -76,7 +88,7 @@ export const RosterProvider = ({ children }: { children: React.ReactNode }) => {
       writeStored(loaded);
       setStatus("ready");
     } catch (err) {
-      setError(err instanceof RosterError ? err.message : "Chargement impossible.");
+      setError(err instanceof RosterError ? err.info : { key: "allyCode.failed" });
       setStatus("error");
     }
   }, []);

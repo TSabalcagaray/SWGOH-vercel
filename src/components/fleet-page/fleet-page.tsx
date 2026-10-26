@@ -3,6 +3,7 @@ import { getAlsoBeats, type Fleet } from "@/data/fleets";
 import { FleetFormation } from "@/components/fleet-formation/fleet-formation";
 import { CapitalShipPortrait } from "@/components/capital-ship-portrait/capital-ship-portrait";
 import { CounterCard } from "@/components/counter-card/counter-card";
+import { T, UnitName } from "@/i18n/locale-provider";
 import styles from "./fleet-page.module.css";
 
 interface FleetPageProps {
@@ -15,28 +16,42 @@ export const FleetPage = ({ ship, fleet }: FleetPageProps) => (
     <section className={styles.hero}>
       <CapitalShipPortrait ship={ship} size="large" />
       <div>
-        <span className={styles.faction}>{ship.faction}</span>
+        <span className={styles.faction}>
+          <T k={ship.faction} />
+        </span>
         <h1 className={styles.title}>{ship.name}</h1>
-        <p className={styles.commander}>{ship.commander}</p>
+        <p className={styles.commander}>
+          <UnitName name={ship.commander} />
+        </p>
       </div>
     </section>
 
     <section className={styles.section}>
-      <h2 className={styles.sectionTitle}>Flotte</h2>
+      <h2 className={styles.sectionTitle}>
+        <T k="fleet.title" />
+      </h2>
       {fleet.isExample && (
-        <p className={styles.notice}>Flotte d&apos;exemple, en attendant la vraie composition.</p>
+        <p className={styles.notice}>
+          <T k="fleet.example" />
+        </p>
       )}
 
       <FleetFormation ship={ship} fleet={fleet} />
     </section>
 
     <section className={styles.section}>
-      <h2 className={styles.sectionTitle}>Counters</h2>
+      <h2 className={styles.sectionTitle}>
+        <T k="counters.title" />
+      </h2>
       {fleet.counters.some((counter) => counter.successRate) && (
-        <p className={styles.legend}>* Taux de réussite estimés à partir des combats en GA.</p>
+        <p className={styles.legend}>
+          <T k="counters.legend" />
+        </p>
       )}
       {fleet.counters.length === 0 ? (
-        <p className={styles.notice}>Aucun counter pour l&apos;instant.</p>
+        <p className={styles.notice}>
+          <T k="counters.none" />
+        </p>
       ) : (
         <ul className={styles.counters}>
           {fleet.counters.map((counter) => {

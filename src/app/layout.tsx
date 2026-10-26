@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { LocaleProvider } from "@/i18n/locale-provider";
 import { RosterProvider } from "@/components/roster/roster-provider";
 import { AllyCodeBox } from "@/components/roster/ally-code-box";
 
@@ -27,10 +28,12 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <RosterProvider>
-          <AllyCodeBox />
-          {children}
-        </RosterProvider>
+        <LocaleProvider>
+          <RosterProvider>
+            <AllyCodeBox />
+            {children}
+          </RosterProvider>
+        </LocaleProvider>
       </body>
     </html>
   );

@@ -6,5 +6,5 @@ export const metadata: Metadata = {
 };
 
 export default function PersonnagesPage() {
-  return <CategoryPage title="Personnages" />;
+  return <CategoryPage title="home.characters" />;
 }

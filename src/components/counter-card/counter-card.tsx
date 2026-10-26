@@ -6,6 +6,8 @@ import { CapitalShipPortrait } from "@/components/capital-ship-portrait/capital-
 import { CounterVideo } from "@/components/counter-video/counter-video";
 import { ShipThumb } from "@/components/ship-thumb/ship-thumb";
 import { UnitStats } from "@/components/unit-stats/unit-stats";
+import { T, UnitName } from "@/i18n/locale-provider";
+import { RateBadge } from "./rate-badge";
 import styles from "./counter-card.module.css";
 
 /** Vert à partir de 80 % de moyenne, orange à partir de 60 %, rouge en dessous */
@@ -29,7 +31,9 @@ const ShipRow = ({ names, kind }: ShipRowProps) => (
       <li key={name} className={`${styles.ship} ${styles[kind]}`}>
         <span className={styles.badge}>{kind === "starter" ? index + 1 : `R${index + 1}`}</span>
         <ShipThumb name={name} size="small" />
-        <span className={styles.shipName}>{name}</span>
+        <span className={styles.shipName}>
+          <UnitName name={name} />
+        </span>
         <UnitStats shipName={name} pilots={getShipPilots(name)} />
       </li>
     ))}
@@ -57,12 +61,9 @@ export const CounterCard = ({ counter, capitalShip, alsoBeats }: CounterCardProp
             <UnitStats shipName={capitalShip.name} pilots={[capitalShip.commander]} />
           </div>
           {counter.successRate && (
-            <span
-              className={`${styles.rate} ${getRateTone(counter.successRate)}`}
-              title="Estimation à partir des combats en GA"
-            >
+            <RateBadge className={`${styles.rate} ${getRateTone(counter.successRate)}`}>
               {formatRate(counter.successRate)}*
-            </span>
+            </RateBadge>
           )}
         </header>
 
@@ -73,7 +74,7 @@ export const CounterCard = ({ counter, capitalShip, alsoBeats }: CounterCardProp
 
         {alsoBeats.length > 0 && (
           <p className={styles.alsoBeats}>
-            Casse aussi :{" "}
+            <T k="counters.alsoBeats" />{" "}
             {alsoBeats.map((ship, index) => (
               <span key={ship.slug}>
                 {index > 0 && ", "}
@@ -87,7 +88,7 @@ export const CounterCard = ({ counter, capitalShip, alsoBeats }: CounterCardProp
       </div>
 
       <div className={styles.video}>
-        <CounterVideo url={counter.videoUrl} title={`Counter ${capitalShip.name}`} />
+        <CounterVideo url={counter.videoUrl} name={capitalShip.name} />
       </div>
     </article>
   );

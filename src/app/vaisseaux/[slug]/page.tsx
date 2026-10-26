@@ -16,7 +16,7 @@ export const generateStaticParams = () =>
 
 export const generateMetadata = async ({ params }: FleetRouteProps): Promise<Metadata> => {
   const ship = getCapitalShip((await params).slug);
-  return { title: `${ship?.name ?? "Flotte"} · SWGOH Teams` };
+  return { title: `${ship?.name ?? "SWGOH"} · SWGOH Teams` };
 };
 
 export default async function FleetRoute({ params }: FleetRouteProps) {
@@ -25,7 +25,7 @@ export default async function FleetRoute({ params }: FleetRouteProps) {
   if (!ship) notFound();
 
   return (
-    <SpacePage backHref="/vaisseaux" backLabel="Vaisseaux">
+    <SpacePage backHref="/vaisseaux" backLabel="nav.ships">
       <FleetPage ship={ship} fleet={getFleet(slug)} />
     </SpacePage>
   );

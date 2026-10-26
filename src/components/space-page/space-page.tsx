@@ -1,9 +1,11 @@
 import Link from "next/link";
+import { T } from "@/i18n/locale-provider";
+import type { MessageKey } from "@/i18n/messages";
 import styles from "./space-page.module.css";
 
 interface SpacePageProps {
   backHref: string;
-  backLabel: string;
+  backLabel: MessageKey;
   children: React.ReactNode;
 }
 
@@ -13,7 +15,7 @@ export const SpacePage = ({ backHref, backLabel, children }: SpacePageProps) => 
     <div className={styles.background} aria-hidden="true" />
     <header className={styles.header}>
       <Link href={backHref} className={styles.back}>
-        ← {backLabel}
+        ← <T k={backLabel} />
       </Link>
     </header>
     <main className={styles.main}>{children}</main>
