@@ -1,15 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { formatAllyCode, normalizeAllyCode } from "@/lib/roster";
 import { useRoster } from "./roster-provider";
 import styles from "./ally-code-box.module.css";
 
 /** Boîte fixe en haut à droite pour saisir son code allié */
 export const AllyCodeBox = () => {
-  const { roster, status, error, load, clear } = useRoster();
+  const { roster, status, error, load, clear, dismissError } = useRoster();
   const [value, setValue] = useState("");
   const code = normalizeAllyCode(value);
+
+  // Le message d'erreur disparaît tout seul au bout de 5 s
+  useEffect(() => {
+    if (!error) return;
+    const timer = setTimeout(dismissError, 5000);
+    return () => clearTimeout(timer);
+  }, [error, dismissError]);
 
   if (roster) {
     return (
@@ -38,7 +45,10 @@ export const AllyCodeBox = () => {
       <input
         className={styles.input}
         value={value}
-        onChange={(event) => setValue(event.target.value)}
+        onChange={(event) => {
+          setValue(event.target.value);
+          dismissError();
+        }}
         placeholder="Code allié"
         inputMode="numeric"
         autoComplete="off"
@@ -48,7 +58,11 @@ export const AllyCodeBox = () => {
       <button type="submit" className={styles.submit} disabled={code.length !== 9 || status === "loading"}>
         {status === "loading" ? "…" : "Charger"}
       </button>
-      {error && <p className={styles.error}>{error}</p>}
+      {error && (
+        <button type="button" className={styles.error} onClick={dismissError} title="Fermer">
+          {error}
+        </button>
+      )}
     </form>
   );
 };

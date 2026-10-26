@@ -50,6 +50,7 @@ const fleets: Record<string, Fleet> = {
     counters: [
       {
         capitalShip: "leviathan",
+        successRate: [100, 100],
         lineup: {
           starters: ["Fury-class Interceptor", "B-28 Extinction-class Bomber", "TIE Dagger"],
           reinforcements: ["Scimitar", "Mark VI Interceptor"],

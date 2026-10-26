@@ -4,7 +4,7 @@ import { useState } from "react";
 import type { CapitalShip } from "@/data/capital-ships";
 import type { Fleet, Lineup } from "@/data/fleets";
 import { getShipPilots } from "@/data/ships";
-import { FighterIcon } from "@/components/ship-icon/ship-icon";
+import { ShipThumb } from "@/components/ship-thumb/ship-thumb";
 import { CapitalShipPortrait } from "@/components/capital-ship-portrait/capital-ship-portrait";
 import { UnitStats } from "@/components/unit-stats/unit-stats";
 import styles from "./fleet-formation.module.css";
@@ -60,7 +60,7 @@ export const FleetFormation = ({ ship, fleet }: FleetFormationProps) => {
             {lineup.starters.map((name, index) => (
               <li key={name} className={`${styles.slot} ${styles.starter}`}>
                 <span className={styles.badge}>{index + 1}</span>
-                <FighterIcon className={styles.slotIcon} />
+                <ShipThumb name={name} />
                 <span className={styles.slotName}>{name}</span>
                 <UnitStats shipName={name} pilots={getShipPilots(name)} />
               </li>
@@ -75,7 +75,7 @@ export const FleetFormation = ({ ship, fleet }: FleetFormationProps) => {
               {lineup.reinforcements.map((name, index) => (
                 <li key={name} className={`${styles.slot} ${styles.reinforcement}`}>
                   <span className={styles.badge}>R{index + 1}</span>
-                  <FighterIcon className={styles.slotIcon} />
+                  <ShipThumb name={name} />
                   <span className={styles.slotName}>{name}</span>
                   <UnitStats shipName={name} pilots={getShipPilots(name)} />
                 </li>

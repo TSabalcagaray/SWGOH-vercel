@@ -17,6 +17,10 @@ export interface SwgohGgPlayer {
   units: SwgohGgUnit[];
 }
 
+/** Image du jeu hébergée par swgoh.gg, chargée directement par le navigateur */
+export const swgohAsset = (texture: string) =>
+  `https://game-assets.swgoh.gg/textures/tex.charui_${texture}.png`;
+
 export const swgohGgPlayerUrl = (allyCode: string) => `https://swgoh.gg/api/player/${allyCode}/`;
 
 /** swgoh.gg encode la relique avec un décalage de 2 (2 = R0, 3 = R1…) */

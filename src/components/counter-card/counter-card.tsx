@@ -4,6 +4,7 @@ import type { Counter } from "@/data/fleets";
 import { getShipPilots } from "@/data/ships";
 import { CapitalShipPortrait } from "@/components/capital-ship-portrait/capital-ship-portrait";
 import { CounterVideo } from "@/components/counter-video/counter-video";
+import { ShipThumb } from "@/components/ship-thumb/ship-thumb";
 import { UnitStats } from "@/components/unit-stats/unit-stats";
 import styles from "./counter-card.module.css";
 
@@ -14,6 +15,26 @@ const getRateTone = ([min, max]: [number, number]) => {
   if (average >= 60) return styles.medium;
   return styles.low;
 };
+
+const formatRate = ([min, max]: [number, number]) => (min === max ? `${min} %` : `${min}–${max} %`);
+
+interface ShipRowProps {
+  names: string[];
+  kind: "starter" | "reinforcement";
+}
+
+const ShipRow = ({ names, kind }: ShipRowProps) => (
+  <ol className={styles.lineup}>
+    {names.map((name, index) => (
+      <li key={name} className={`${styles.ship} ${styles[kind]}`}>
+        <span className={styles.badge}>{kind === "starter" ? index + 1 : `R${index + 1}`}</span>
+        <ShipThumb name={name} size="small" />
+        <span className={styles.shipName}>{name}</span>
+        <UnitStats shipName={name} pilots={getShipPilots(name)} />
+      </li>
+    ))}
+  </ol>
+);
 
 interface CounterCardProps {
   counter: Counter;
@@ -26,57 +47,45 @@ export const CounterCard = ({ counter, capitalShip, alsoBeats }: CounterCardProp
 
   return (
     <article className={`${styles.card} ${capitalShip.alignment === "light" ? styles.light : styles.dark}`}>
-      <header className={styles.header}>
-        <CapitalShipPortrait ship={capitalShip} size="tiny" />
-        <div className={styles.heading}>
-          <h3 className={styles.name}>
-            <Link href={`/vaisseaux/${capitalShip.slug}`}>{capitalShip.name}</Link>
-          </h3>
-          <UnitStats shipName={capitalShip.name} pilots={[capitalShip.commander]} />
-        </div>
-        {counter.successRate && (
-          <span className={`${styles.rate} ${getRateTone(counter.successRate)}`}>
-            {counter.successRate[0]}–{counter.successRate[1]} %
-          </span>
-        )}
-      </header>
-
-      <ol className={styles.lineup}>
-        {starters.map((name, index) => (
-          <li key={name} className={`${styles.ship} ${styles.starter}`}>
-            <span className={styles.badge}>{index + 1}</span>
-            <span className={styles.shipName}>{name}</span>
-            <UnitStats shipName={name} pilots={getShipPilots(name)} />
-          </li>
-        ))}
-        {reinforcements.map((name, index) => (
-          <li key={name} className={`${styles.ship} ${styles.reinforcement}`}>
-            <span className={styles.badge}>R{index + 1}</span>
-            <span className={styles.shipName}>{name}</span>
-            <UnitStats shipName={name} pilots={getShipPilots(name)} />
-          </li>
-        ))}
-      </ol>
-
-      {alsoBeats.length > 0 && (
-        <p className={styles.alsoBeats}>
-          Casse aussi :{" "}
-          {alsoBeats.map((ship, index) => (
-            <span key={ship.slug}>
-              {index > 0 && ", "}
-              <Link href={`/vaisseaux/${ship.slug}`}>{ship.name}</Link>
+      <div className={styles.details}>
+        <header className={styles.header}>
+          <CapitalShipPortrait ship={capitalShip} size="tiny" />
+          <div className={styles.heading}>
+            <h3 className={styles.name}>
+              <Link href={`/vaisseaux/${capitalShip.slug}`}>{capitalShip.name}</Link>
+            </h3>
+            <UnitStats shipName={capitalShip.name} pilots={[capitalShip.commander]} />
+          </div>
+          {counter.successRate && (
+            <span className={`${styles.rate} ${getRateTone(counter.successRate)}`}>
+              {formatRate(counter.successRate)}
             </span>
-          ))}
-        </p>
-      )}
+          )}
+        </header>
 
-      {counter.notes && <p className={styles.notes}>{counter.notes}</p>}
+        <div className={styles.rows}>
+          <ShipRow names={starters} kind="starter" />
+          {reinforcements.length > 0 && <ShipRow names={reinforcements} kind="reinforcement" />}
+        </div>
 
-      {counter.videoUrl ? (
+        {alsoBeats.length > 0 && (
+          <p className={styles.alsoBeats}>
+            Casse aussi :{" "}
+            {alsoBeats.map((ship, index) => (
+              <span key={ship.slug}>
+                {index > 0 && ", "}
+                <Link href={`/vaisseaux/${ship.slug}`}>{ship.name}</Link>
+              </span>
+            ))}
+          </p>
+        )}
+
+        {counter.notes && <p className={styles.notes}>{counter.notes}</p>}
+      </div>
+
+      <div className={styles.video}>
         <CounterVideo url={counter.videoUrl} title={`Counter ${capitalShip.name}`} />
-      ) : (
-        <p className={styles.noVideo}>▶ Vidéo à venir</p>
-      )}
+      </div>
     </article>
   );
 };

@@ -1,10 +1,44 @@
-/** Pilotes de chaque vaisseau (noms tels qu'affichés dans le jeu). Absent = sans équipage ou pas encore renseigné. */
-export const shipPilots: Record<string, string[]> = {
-  Scimitar: ["Darth Maul"],
-  "Punishing One": ["Dengar"],
-  "Xanadu Blood": ["Cad Bane"],
-  "Slave I": ["Boba Fett"],
-  "TIE Advanced x1": ["Darth Vader"],
+import { swgohAsset } from "@/lib/swgoh-gg";
+
+interface ShipInfo {
+  /** Pilotes (noms tels qu'affichés dans le jeu). Absent = sans équipage ou pas encore renseigné. */
+  pilots?: string[];
+  /** Nom de la texture swgoh.gg (tex.charui_<texture>.png) */
+  texture?: string;
+}
+
+/**
+ * Infos des vaisseaux, par nom tel qu'affiché dans le jeu.
+ * Texture vérifiée : slave1. Les autres sont à confirmer (la silhouette s'affiche si l'image ne charge pas).
+ */
+const ships: Record<string, ShipInfo> = {
+  "Fury-class Interceptor": { texture: "furyinterceptor" },
+  "B-28 Extinction-class Bomber": { texture: "b28bomber" },
+  "TIE Dagger": { texture: "tiedagger" },
+  Scimitar: { pilots: ["Darth Maul"], texture: "sithinfiltrator" },
+  "Sith Fighter": { texture: "sithfighter" },
+  "Mark VI Interceptor": { texture: "markvi" },
+  "Punishing One": { pilots: ["Dengar"], texture: "punishingone" },
+  "Razor Crest": { texture: "razorcrest" },
+  "Xanadu Blood": { pilots: ["Cad Bane"], texture: "xanadublood" },
+  "Slave I": { pilots: ["Boba Fett"], texture: "slave1" },
+  Scythe: { texture: "scythe" },
+  "TIE Advanced x1": { pilots: ["Darth Vader"], texture: "tieadvanced" },
+  "Imperial TIE Bomber": { texture: "tiebomber" },
+  "Rebel B-wing": { texture: "bwing" },
+  "TIE Defender": { texture: "tiedefender" },
+  "Millennium Falcon": { texture: "mfalcon" },
+  Ghost: { texture: "ghost" },
+  "Phantom II": { texture: "phantom" },
+  Outrider: { texture: "outrider" },
+  "Biggs Darklighter's X-wing": { texture: "xwing_red3" },
+  "Rebel Y-wing": { texture: "ywing_rebel" },
+  "Bistan's U-wing": { texture: "uwing" },
 };
 
-export const getShipPilots = (shipName: string) => shipPilots[shipName] ?? [];
+export const getShipPilots = (shipName: string) => ships[shipName]?.pilots ?? [];
+
+export const getShipImage = (shipName: string) => {
+  const texture = ships[shipName]?.texture;
+  return texture ? swgohAsset(texture) : undefined;
+};

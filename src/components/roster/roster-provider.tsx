@@ -12,6 +12,7 @@ interface RosterContextValue {
   error: string | null;
   load: (allyCode: string) => Promise<void>;
   clear: () => void;
+  dismissError: () => void;
 }
 
 const RosterContext = createContext<RosterContextValue | null>(null);
@@ -87,6 +88,8 @@ export const RosterProvider = ({ children }: { children: React.ReactNode }) => {
     writeStored(null);
   }, []);
 
+  const dismissError = useCallback(() => setError(null), []);
+
   useEffect(() => {
     const stored = readStored();
     if (!stored) return;
@@ -96,7 +99,7 @@ export const RosterProvider = ({ children }: { children: React.ReactNode }) => {
   }, [load]);
 
   return (
-    <RosterContext.Provider value={{ roster, status, error, load, clear }}>
+    <RosterContext.Provider value={{ roster, status, error, load, clear, dismissError }}>
       {children}
     </RosterContext.Provider>
   );
